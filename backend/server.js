@@ -10,6 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/", router);
 
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.sb3q3.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
 mongoose.connect('mongodb+srv://admin:5TJCJhvO4o44TNmr@cluster0.sb3q3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true });
 const connection = mongoose.connection;
 
