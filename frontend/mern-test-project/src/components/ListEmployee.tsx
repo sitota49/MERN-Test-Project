@@ -15,7 +15,7 @@ import { fetchEmployeeRequest } from "../store/employee/actions";
 import { IEmployee } from '../store/employee/types';
 
 
-const EmployeeList: FC = () => {
+const ListEmployee: FC = () => {
    const dispatch = useDispatch();
         const pending = useSelector(getPendingSelector);
         const employees = useSelector(getEmployeesSelector);
@@ -28,25 +28,19 @@ const EmployeeList: FC = () => {
     
 }, []);
 
-    const setEmployeeListToEditHandler = (id: string) => {
+    const setListEmployeeToEditHandler = (id: string) => {
         console.log("edit clicked", id)
        // dispatch(setListToEdit(id));
     } 
 
-    const setEmployeeListIdToDeleteHandler = (id: string) => {
+    const setListEmployeeIdToDeleteHandler = (id: string) => {
         console.log("delete clicked", id)
        // dispatch(setListIdToDelete(id));
     }
 
-    const items = employees.map(({_id,  name, date_of_birth, gender, salary }) => ({
-	name:_id + ' - ' + name,
-	content: <p>{date_of_birth + salary +gender}</p>
-}));
-
-
-
-  return(
+   return(
       <> 
+       <Button variant="primary" href="/add">Add New Employee</Button>
         
         <Accordion>
 
@@ -64,8 +58,8 @@ const EmployeeList: FC = () => {
         Gender: {employee.gender}<br/>
         Salary: {employee.salary}
      </p>
-      <Button variant="outline-success" onClick={() => setEmployeeListToEditHandler(employee._id)}>Edit</Button>
-      <Button variant="outline-danger" onClick={() => setEmployeeListIdToDeleteHandler(employee._id)
+      <Button variant="outline-success" onClick={() => setListEmployeeToEditHandler(employee._id)}>Edit</Button>
+      <Button variant="outline-danger" onClick={() => setListEmployeeIdToDeleteHandler(employee._id)
       }>Delete</Button>
     </Accordion.Body>
   </Accordion.Item>
@@ -84,4 +78,4 @@ const EmployeeList: FC = () => {
   );
 }
 
-export default EmployeeList;
+export default ListEmployee;

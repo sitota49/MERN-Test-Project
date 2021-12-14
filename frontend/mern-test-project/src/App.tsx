@@ -1,15 +1,29 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import EmployeeList from './components/EmployeeList';
-import {  Button } from 'react-bootstrap'
-const App = () => {
- 
+import ListEmployee from './components/ListEmployee';
+import { BrowserRouter, Route, Routes, useRoutes  } from "react-router-dom";
+import AddEmployee from './components/AddEmployee';
 
+
+const App = () => {
+
+   let routes = useRoutes([
+    { path: "/", element: <ListEmployee /> },
+      { path: "/add", element: <AddEmployee /> },
+ 
+  ]);
+  return routes;
+ 
+};
+
+const AppWrapper = () => {
   return (
-    <>
-     <Button variant="primary">Add New Employee</Button>
-      <EmployeeList />
-    </>
+    <BrowserRouter>
+    <div className="container">
+
+      <App />
+    </div>
+    </BrowserRouter>
   );
 };
 
-export default App;
+export default AppWrapper;
