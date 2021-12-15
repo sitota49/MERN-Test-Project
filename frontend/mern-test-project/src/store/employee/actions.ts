@@ -27,6 +27,7 @@ import {
   SingleEmployeeFailure,
   SingleEmployeeFailurePayload,
   AddEmployeeRequest,
+  AddEmployeeRequestPayload,
   AddEmployeeSuccess,
   AddEmployeeSuccessPayload,
   AddEmployeeFailure,
@@ -79,8 +80,11 @@ export const singleEmployeeFailure = (
   payload,
 });
 
-export const addEmployeeRequest = (): AddEmployeeRequest => ({
+export const addEmployeeRequest = (
+  payload: AddEmployeeRequestPayload
+): AddEmployeeRequest => ({
   type: ADD_EMPLOYEE_REQUEST,
+  payload,
 });
 
 export const addEmployeeSuccess = (

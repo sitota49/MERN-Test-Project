@@ -27,6 +27,10 @@ const initialState: EmployeeState = {
 export default (state = initialState, action: EmployeeActions) => {
   switch (action.type) {
     case FETCH_EMPLOYEE_REQUEST:
+    case SINGLE_EMPLOYEE_REQUEST:
+    case ADD_EMPLOYEE_REQUEST:
+    case UPDATE_EMPLOYEE_REQUEST:
+    case DELETE_EMPLOYEE_REQUEST:
       return {
         ...state,
         pending: true,
@@ -39,84 +43,9 @@ export default (state = initialState, action: EmployeeActions) => {
         error: null,
       };
     case FETCH_EMPLOYEE_FAILURE:
-      return {
-        ...state,
-        pending: false,
-        employees: [],
-        error: action.payload.error,
-      };
-    case SINGLE_EMPLOYEE_REQUEST:
-      return {
-        ...state,
-        pending: true,
-      };
-    case SINGLE_EMPLOYEE_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        employees: action.payload.employees,
-        error: null,
-      };
     case SINGLE_EMPLOYEE_FAILURE:
-      return {
-        ...state,
-        pending: false,
-        employees: [],
-        error: action.payload.error,
-      };
-
-    case ADD_EMPLOYEE_REQUEST:
-      return {
-        ...state,
-        pending: true,
-      };
-    case ADD_EMPLOYEE_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        employees: action.payload.employees,
-        error: null,
-      };
     case ADD_EMPLOYEE_FAILURE:
-      return {
-        ...state,
-        pending: false,
-        employees: [],
-        error: action.payload.error,
-      };
-
-    case UPDATE_EMPLOYEE_REQUEST:
-      return {
-        ...state,
-        pending: true,
-      };
-    case UPDATE_EMPLOYEE_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        employees: action.payload.employees,
-        error: null,
-      };
     case UPDATE_EMPLOYEE_FAILURE:
-      return {
-        ...state,
-        pending: false,
-        employees: [],
-        error: action.payload.error,
-      };
-
-    case DELETE_EMPLOYEE_REQUEST:
-      return {
-        ...state,
-        pending: true,
-      };
-    case DELETE_EMPLOYEE_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        employees: action.payload.employees,
-        error: null,
-      };
     case DELETE_EMPLOYEE_FAILURE:
       return {
         ...state,
@@ -124,6 +53,37 @@ export default (state = initialState, action: EmployeeActions) => {
         employees: [],
         error: action.payload.error,
       };
+  
+    case SINGLE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        employees: action.payload.employees,
+        error: null,
+      };
+   
+   
+    case ADD_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        error: null,
+      };
+    
+    case UPDATE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        error: null,
+      };
+    
+    case DELETE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        error: null,
+      };
+    
     default:
       return {
         ...state,

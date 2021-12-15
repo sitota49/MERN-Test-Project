@@ -47,8 +47,15 @@ export interface SingleEmployeeFailurePayload {
   error: string;
 }
 
+export interface AddEmployeeRequestPayload {
+  name: string;
+  date_of_birth: string;
+  gender: string;
+  salary: number;
+}
+
 export interface AddEmployeeSuccessPayload {
-  employees: IEmployee[];
+  employee: IEmployee;
 }
 
 export interface AddEmployeeFailurePayload {
@@ -56,7 +63,7 @@ export interface AddEmployeeFailurePayload {
 }
 
 export interface UpdateEmployeeSuccessPayload {
-  employees: IEmployee[];
+  employee: IEmployee;
 }
 
 export interface UpdateEmployeeFailurePayload {
@@ -64,7 +71,7 @@ export interface UpdateEmployeeFailurePayload {
 }
 
 export interface DeleteEmployeeSuccessPayload {
-  employees: IEmployee[];
+  employee: IEmployee;
 }
 
 export interface DeleteEmployeeFailurePayload {
@@ -101,6 +108,7 @@ export type SingleEmployeeFailure = {
 
 export interface AddEmployeeRequest {
   type: typeof ADD_EMPLOYEE_REQUEST;
+  payload: AddEmployeeRequestPayload;
 }
 
 export type AddEmployeeSuccess = {

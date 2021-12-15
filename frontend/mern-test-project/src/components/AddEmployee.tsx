@@ -11,8 +11,8 @@ import {
   getEmployeesSelector,
   getErrorSelector,
 } from "../store/employee/selectors";
-import { fetchEmployeeRequest } from "../store/employee/actions";
-import { IEmployee } from '../store/employee/types';
+import { addEmployeeRequest } from "../store/employee/actions";
+import { AddEmployeeRequestPayload, IEmployee } from '../store/employee/types';
 
 
 const AddEmployee: FC = () => {
@@ -59,13 +59,14 @@ const AddEmployee: FC = () => {
         return alert('Employee date of birth is required!');
         }
 
-        // const newTask: Task = {
-        // name: taskName,
-        // id: `task-${new Date().getTime()}`,
-        // completed: false
-        // }
+        const newEmployee: AddEmployeeRequestPayload = {
+          name: employeeName,
+          gender:employeeGender,
+          date_of_birth:employeeDOB,
+          salary: +employeeSalary
+        }
 
-        // dispatch(addTask(newTask, list));
+        dispatch(addEmployeeRequest(newEmployee));
        
         
         console.log(employeeDOB);
@@ -75,9 +76,7 @@ const AddEmployee: FC = () => {
         setEmployeeDOB('');
     }
  
-    useEffect(() => {
-           dispatch(fetchEmployeeRequest());
-    }, []);
+ 
 
  
 

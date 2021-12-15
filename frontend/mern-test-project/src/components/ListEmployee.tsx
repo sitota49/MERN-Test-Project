@@ -23,7 +23,6 @@ const ListEmployee: FC = () => {
 
        
     useEffect(() => {
-   
         dispatch(fetchEmployeeRequest());
     
 }, []);
