@@ -5,7 +5,6 @@ import 'react-accordion-ts/src/panel.css';
 import { Accordion, Card, Button } from 'react-bootstrap'
 
 
-
 import {
   getPendingSelector,
   getEmployeesSelector,
@@ -13,9 +12,11 @@ import {
 } from "../store/employee/selectors";
 import { fetchEmployeeRequest } from "../store/employee/actions";
 import { IEmployee } from '../store/employee/types';
+import { Link } from 'react-router-dom';
 
 
-const ListEmployee: FC = () => {
+const ListEmployee: FC = (props) => {
+
    const dispatch = useDispatch();
         const pending = useSelector(getPendingSelector);
         const employees = useSelector(getEmployeesSelector);
@@ -27,15 +28,7 @@ const ListEmployee: FC = () => {
     
 }, []);
 
-    const setListEmployeeToEditHandler = (id: string) => {
-        console.log("edit clicked", id)
-       // dispatch(setListToEdit(id));
-    } 
 
-    const setListEmployeeIdToDeleteHandler = (id: string) => {
-        console.log("delete clicked", id)
-       // dispatch(setListIdToDelete(id));
-    }
 
    return(
       <> 
@@ -57,9 +50,13 @@ const ListEmployee: FC = () => {
         Gender: {employee.gender}<br/>
         Salary: {employee.salary}
      </p>
-      <Button variant="outline-success" onClick={() => setListEmployeeToEditHandler(employee._id)}>Edit</Button>
-      <Button variant="outline-danger" onClick={() => setListEmployeeIdToDeleteHandler(employee._id)
-      }>Delete</Button>
+     <Link to={`update/${employee._id}`}>
+           Edit
+          </Link>
+          <br />
+    <Link to={`delete/${employee._id}`}>
+           Delete
+          </Link>
     </Accordion.Body>
   </Accordion.Item>
                 

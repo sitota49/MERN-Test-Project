@@ -46,12 +46,13 @@ const addEmployee = (req, res) => {
 
 
 const updateEmployee = function (req, res) {
+    console.log(req.body);
      Employee.findById(req.params.id)
     .then(employee => {
-      employee.username = req.body.username;
-      employee.description = req.body.description;
+      employee.name = req.body.name;
+      employee.gender = req.body.gender;
       employee.salary = Number(req.body.salary);
-      employee.date = Date.parse(req.body.date);
+      employee.date_of_birth = Date.parse(req.body.date_of_birth);
 
       employee.save()
   .then(() =>  res.status(201).json({

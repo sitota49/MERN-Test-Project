@@ -28,6 +28,7 @@ export interface IEmployee {
 export interface EmployeeState {
   pending: boolean;
   employees: IEmployee[];
+  singleEmployee: IEmployee | null;
   error: string | null;
 }
 
@@ -38,9 +39,12 @@ export interface FetchEmployeeSuccessPayload {
 export interface FetchEmployeeFailurePayload {
   error: string;
 }
+export interface SingleEmployeeRequestPayload {
+  _id: string;
+}
 
 export interface SingleEmployeeSuccessPayload {
-  employees: IEmployee[];
+  employee: IEmployee;
 }
 
 export interface SingleEmployeeFailurePayload {
@@ -60,6 +64,14 @@ export interface AddEmployeeSuccessPayload {
 
 export interface AddEmployeeFailurePayload {
   error: string;
+}
+
+export interface UpdateEmployeeRequestPayload {
+  _id: string;
+  name: string;
+  date_of_birth: string;
+  gender: string;
+  salary: number;
 }
 
 export interface UpdateEmployeeSuccessPayload {
@@ -94,6 +106,7 @@ export type FetchEmployeeFailure = {
 
 export interface SingleEmployeeRequest {
   type: typeof SINGLE_EMPLOYEE_REQUEST;
+  payload: SingleEmployeeRequestPayload;
 }
 
 export type SingleEmployeeSuccess = {
@@ -123,6 +136,7 @@ export type AddEmployeeFailure = {
 
 export interface UpdateEmployeeRequest {
   type: typeof UPDATE_EMPLOYEE_REQUEST;
+  payload: UpdateEmployeeRequestPayload;
 }
 
 export type UpdateEmployeeSuccess = {

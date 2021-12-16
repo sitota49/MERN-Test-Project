@@ -68,8 +68,6 @@ const AddEmployee: FC = () => {
 
         dispatch(addEmployeeRequest(newEmployee));
        
-        
-        console.log(employeeDOB);
         setEmployeeName('');
         setEmployeeGender('');
         setEmployeeSalary('0');
@@ -109,7 +107,7 @@ const AddEmployee: FC = () => {
             <input type="date" className="input" placeholder="Date of Birth" value={employeeDOB} onChange={changeDOBHandler} />
           </div>          
           <div className="control mt-4">
-           <Button className="submit-button" value="submit" type="submit">submit</Button>
+           <Button className="submit-button" value="submit" type="submit">Add</Button>
           </div>
         
       </form>

@@ -21,6 +21,7 @@ import { EmployeeActions, EmployeeState } from "./types";
 const initialState: EmployeeState = {
   pending: false,
   employees: [],
+  singleEmployee:null,
   error: null,
 };
 
@@ -58,7 +59,7 @@ export default (state = initialState, action: EmployeeActions) => {
       return {
         ...state,
         pending: false,
-        employees: action.payload.employees,
+        singleEmployee: action.payload.employee,
         error: null,
       };
    

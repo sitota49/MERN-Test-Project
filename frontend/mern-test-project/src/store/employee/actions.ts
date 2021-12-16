@@ -22,6 +22,7 @@ import {
   FetchEmployeeFailure,
   FetchEmployeeFailurePayload,
   SingleEmployeeRequest,
+  SingleEmployeeRequestPayload,
   SingleEmployeeSuccess,
   SingleEmployeeSuccessPayload,
   SingleEmployeeFailure,
@@ -33,6 +34,7 @@ import {
   AddEmployeeFailure,
   AddEmployeeFailurePayload,
   UpdateEmployeeRequest,
+  UpdateEmployeeRequestPayload,
   UpdateEmployeeSuccess,
   UpdateEmployeeSuccessPayload,
   UpdateEmployeeFailure,
@@ -62,8 +64,11 @@ export const fetchEmployeeFailure = (
   payload,
 });
 
-export const singleEmployeeRequest = (): SingleEmployeeRequest => ({
+export const singleEmployeeRequest = (
+  payload: SingleEmployeeRequestPayload
+): SingleEmployeeRequest => ({
   type: SINGLE_EMPLOYEE_REQUEST,
+  payload,
 });
 
 export const singleEmployeeSuccess = (
@@ -101,8 +106,11 @@ export const addEmployeeFailure = (
   payload,
 });
 
-export const updateEmployeeRequest = (): UpdateEmployeeRequest => ({
+export const updateEmployeeRequest = (
+  payload: UpdateEmployeeRequestPayload
+): UpdateEmployeeRequest => ({
   type: UPDATE_EMPLOYEE_REQUEST,
+  payload,
 });
 
 export const updateEmployeeSuccess = (
