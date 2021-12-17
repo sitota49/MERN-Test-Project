@@ -11,9 +11,9 @@ import {
   UPDATE_EMPLOYEE_REQUEST,
   UPDATE_EMPLOYEE_FAILURE,
   UPDATE_EMPLOYEE_SUCCESS,
-  DELETE_EMPLOYEE_REQUEST,
   DELETE_EMPLOYEE_FAILURE,
   DELETE_EMPLOYEE_SUCCESS,
+  DELETE_EMPLOYEE_REQUEST,
 } from "./actionTypes";
 import {
   FetchEmployeeRequest,
@@ -40,6 +40,7 @@ import {
   UpdateEmployeeFailure,
   UpdateEmployeeFailurePayload,
   DeleteEmployeeRequest,
+  DeleteEmployeeRequestPayload,
   DeleteEmployeeSuccess,
   DeleteEmployeeSuccessPayload,
   DeleteEmployeeFailure,
@@ -127,8 +128,11 @@ export const updateEmployeeFailure = (
   payload,
 });
 
-export const deleteEmployeeRequest = (): DeleteEmployeeRequest => ({
+export const deleteEmployeeRequest = (
+  payload: DeleteEmployeeRequestPayload
+): DeleteEmployeeRequest => ({
   type: DELETE_EMPLOYEE_REQUEST,
+  payload,
 });
 
 export const deleteEmployeeSuccess = (

@@ -33,6 +33,8 @@ import {
   UpdateEmployeeRequest,
   UpdateEmployeeRequestPayload,
   SingleEmployeeSuccessPayload,
+  DeleteEmployeeRequestPayload,
+  DeleteEmployeeRequest,
 } from "./types";
 
 const getEmployees = () => {
@@ -56,6 +58,9 @@ const updateEmployee = (employee: UpdateEmployeeRequestPayload) => {
   return;
 };
 
+const deleteEmployee = (req: DeleteEmployeeRequestPayload) => {
+  return axios.delete<string>(`http://localhost:4000/employees/${req._id}`);
+};
 function* fetchEmployeeSaga() {
   try {
     const response: AxiosResponse<IEmployee[]> = yield call(getEmployees);
@@ -121,7 +126,6 @@ function* updateEmployeeSaga(action: UpdateEmployeeRequest) {
       updateEmployee,
       action.payload
     );
-    console.log(response);
     yield put(
       updateEmployeeSuccess({
         employee: response.data,
@@ -136,11 +140,33 @@ function* updateEmployeeSaga(action: UpdateEmployeeRequest) {
   }
 }
 
+function* deleteEmployeeSaga(action: DeleteEmployeeRequest) {
+  try {
+    const response: AxiosResponse<string> = yield call(
+      deleteEmployee,
+      action.payload
+    );
+
+    yield put(
+      deleteEmployeeSuccess({
+        success: response.data,
+      })
+    );
+  } catch (e: any) {
+    yield put(
+      deleteEmployeeFailure({
+        error: e.message,
+      })
+    );
+  }
+}
+
 function* employeeSaga() {
   yield all([takeLatest(FETCH_EMPLOYEE_REQUEST, fetchEmployeeSaga)]);
   yield all([takeLatest(SINGLE_EMPLOYEE_REQUEST, singleEmployeeSaga)]);
   yield all([takeLatest(ADD_EMPLOYEE_REQUEST, addEmployeeSaga)]);
-   yield all([takeLatest(UPDATE_EMPLOYEE_REQUEST, updateEmployeeSaga)]);
+  yield all([takeLatest(UPDATE_EMPLOYEE_REQUEST, updateEmployeeSaga)]);
+  yield all([takeLatest(DELETE_EMPLOYEE_REQUEST, deleteEmployeeSaga)]);
 }
 
 export default employeeSaga;

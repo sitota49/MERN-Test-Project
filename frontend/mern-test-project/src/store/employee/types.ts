@@ -30,6 +30,7 @@ export interface EmployeeState {
   employees: IEmployee[];
   singleEmployee: IEmployee | null;
   error: string | null;
+  sucess:string| null
 }
 
 export interface FetchEmployeeSuccessPayload {
@@ -82,8 +83,12 @@ export interface UpdateEmployeeFailurePayload {
   error: string;
 }
 
+export interface DeleteEmployeeRequestPayload {
+  _id: string;
+}
+
 export interface DeleteEmployeeSuccessPayload {
-  employee: IEmployee;
+  success:string
 }
 
 export interface DeleteEmployeeFailurePayload {
@@ -151,6 +156,7 @@ export type UpdateEmployeeFailure = {
 
 export interface DeleteEmployeeRequest {
   type: typeof DELETE_EMPLOYEE_REQUEST;
+  payload: DeleteEmployeeRequestPayload;
 }
 
 export type DeleteEmployeeSuccess = {

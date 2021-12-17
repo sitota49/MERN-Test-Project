@@ -23,6 +23,7 @@ const initialState: EmployeeState = {
   employees: [],
   singleEmployee:null,
   error: null,
+  sucess:null
 };
 
 export default (state = initialState, action: EmployeeActions) => {
@@ -83,6 +84,7 @@ export default (state = initialState, action: EmployeeActions) => {
         ...state,
         pending: false,
         error: null,
+        sucess: action.payload.success,
       };
     
     default:
