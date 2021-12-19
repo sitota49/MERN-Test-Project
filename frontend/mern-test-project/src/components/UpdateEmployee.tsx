@@ -2,14 +2,14 @@ import  { FC, useEffect, FormEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-accordion-ts/src/panel.css';
 import { useParams } from "react-router-dom";
-import { Button } from 'react-bootstrap'
+import { Button , Form, FloatingLabel} from 'react-bootstrap'
 import {  useNavigate } from "react-router-dom";
 import {
   getSingleEmployeeSelector
 } from "../store/employee/selectors";
 import { fetchEmployeeRequest, singleEmployeeRequest, updateEmployeeRequest } from "../store/employee/actions";
 import { UpdateEmployeeRequestPayload, SingleEmployeeRequestPayload } from '../store/employee/types';
-
+import { Heading, StyledButton } from './styles/Header.styles';
 
 const UpdateEmployee: FC = () => {
     const dispatch = useDispatch();
@@ -27,25 +27,25 @@ const UpdateEmployee: FC = () => {
     }, []);
 
     
-    const changeNameHandler = (e: FormEvent<HTMLInputElement>) => {
+    const changeNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       if(singleEmployee != null){
         singleEmployee.name = e.currentTarget.value;
       }
     }
 
-    const changeGenderHandler = (e: FormEvent<HTMLSelectElement>) => {
+    const changeGenderHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
       if(singleEmployee != null){
         singleEmployee.gender = e.currentTarget.value;
       }
     }
     
-    const changeSalaryHandler = (e: FormEvent<HTMLInputElement>) => {
+    const changeSalaryHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       if(singleEmployee != null){
         singleEmployee.salary = +e.currentTarget.value;
       }
     }
 
-    const changeDOBHandler = (e: FormEvent<HTMLInputElement>) => {
+    const changeDOBHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       if(singleEmployee != null){
         singleEmployee.date_of_birth = e.currentTarget.value;
       }      
@@ -75,21 +75,34 @@ const UpdateEmployee: FC = () => {
 
     return(
     <>
-       <h1>Update Employee</h1>
-    
-      <section className="section">
+     <div className="row">
+      <div className="col-2">
+    <Button href="/" variant='success' className='my-3'>Go Back</Button>
+      </div>
+      <div className="col-10">
+       
+      </div>
+    </div>
+    <div className="row">
+<Heading>Update Employee</Heading>
+    </div>
+       <Form onSubmit={submitForm}>
+  
+ <Form.Group className="mb-3" controlId="employeeNameInput">
+    <FloatingLabel
+    controlId="floatingNameInput"
+    label="Employee Name"
+    className="mb-3"
+  >
+    <Form.Control type="text" placeholder="John Doe" defaultValue={singleEmployee?.name} onChange={changeNameHandler} required />
+  </FloatingLabel>
+  </Form.Group>
 
- 
-      <form onSubmit={submitForm}>
-          
-          <label className="label">Employee Name</label>
-          <div className="control">
-            <input type="text" className="input" placeholder="Add Employee" defaultValue={singleEmployee?.name} onChange={changeNameHandler} />
-          </div>
-            <label className="label">Gender</label>
-          <div className="control">
-            <select className="input" placeholder="Select Gender" onChange={changeGenderHandler}>
-               {singleEmployee?.gender === "Male" ? 
+  <Form.Group className="mb-3" controlId="employeeGenderInput">
+  <FloatingLabel controlId="floatingGenderSelect" label="Gender">
+  <Form.Select aria-label="Floating label select example"
+  onChange={changeGenderHandler} required>
+         {singleEmployee?.gender === "Male" ? 
                <>
                 <option value="Male" selected>Male</option>
                 <option value="Female">Female</option> 
@@ -98,23 +111,32 @@ const UpdateEmployee: FC = () => {
                 <option value="Male">Male</option>
                 <option value="Female"selected>Female</option>
                 </>}
-                
-            </select>
-          </div>
-        <label className="label">Salary</label>
-          <div className="control">
-            <input type="number" min={0} className="input" placeholder="Salary" defaultValue={singleEmployee?.salary} onChange={changeSalaryHandler} />
-          </div> 
-           <label className="label">Date of Birth</label>
-          <div className="control">
-            <input type="date" className="input" placeholder="Date of Birth" defaultValue={singleEmployee?.date_of_birth.slice(0, 10)} onChange={changeDOBHandler} />
-          </div>          
-          <div className="control mt-4">
-           <Button className="submit-button" value="submit" type="submit">Update</Button>
-          </div>
-        
-      </form>
-    </section>
+  </Form.Select>
+</FloatingLabel>
+  </Form.Group>
+
+ <Form.Group className="mb-3" controlId="employeeSalaryInput">
+    <FloatingLabel
+    controlId="floatingSalaryInput"
+    label="Employee Salary"
+    className="mb-3"
+  >
+    <Form.Control type="number"  min={0} defaultValue={singleEmployee?.salary} onChange={changeSalaryHandler} required />
+  </FloatingLabel>
+  </Form.Group>
+
+ <Form.Group className="mb-3" controlId="employeeDOBInput">
+    <FloatingLabel
+    controlId="floatingDOBInput"
+    label="Date of Birth"
+    className="mb-3"
+  >
+    <Form.Control type="date" defaultValue={singleEmployee?.date_of_birth.slice(0, 10)} onChange={changeDOBHandler} required placeholder="Date of Birth" />
+  </FloatingLabel>
+  </Form.Group>
+<StyledButton className="submit-button" variant="success" value="submit" type="submit">Update Employee</StyledButton>
+</Form>
+  
     </>
   );
 }

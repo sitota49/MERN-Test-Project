@@ -2,14 +2,13 @@ import { FC, useState, FormEvent} from 'react';
 import { useDispatch } from 'react-redux';
 
 import 'react-accordion-ts/src/panel.css';
-import {Button, Form, FloatingLabel, FormControl} from 'react-bootstrap'
+import {Button, Form, FloatingLabel} from 'react-bootstrap'
 import {  useNavigate } from "react-router-dom";
 
 
 import { addEmployeeRequest, fetchEmployeeRequest } from "../store/employee/actions";
 import { AddEmployeeRequestPayload } from '../store/employee/types';
-import { Heading } from './styles/Header.styles';
-import { StyledSubmitButton } from './styles/AddEmployee.styles';
+import { Heading, StyledButton } from './styles/Header.styles';
 
 
 const AddEmployee: FC = () => {
@@ -87,40 +86,7 @@ const AddEmployee: FC = () => {
     <div className="row">
 <Heading>Add New Employee</Heading>
     </div>
-      {/* <section className="section">
-
-      <form >
-          
-          <label className="label">Employee Name</label>
-          <div className="control">
-            <input type="text" className="input" placeholder="Add Employee" value={employeeName} onChange={changeNameHandler} required/>
-          </div>
-            <label className="label">Gender</label>
-          <div className="control">
-            <select className="input" placeholder="Select Gender" value={employeeGender} onChange={changeGenderHandler} required>
-                <option selected>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                </select>
-          </div>
-        <label className="label">Salary</label>
-          <div className="control">
-            <input type="number" min={0} className="input" placeholder="Salary" value={employeeSalary} onChange={changeSalaryHandler} required/>
-          </div> 
-           <label className="label">Date of Birth</label>
-          <div className="control">
-            <input type="date" className="input" placeholder="Date of Birth" value={employeeDOB} onChange={changeDOBHandler} required/>
-          </div>          
-          
-           
-        
-      </form>
-    </section> */}
-
-
-
-    <Form onSubmit={submitForm}>
- 
+ <Form onSubmit={submitForm}>
   
  <Form.Group className="mb-3" controlId="employeeNameInput">
     <FloatingLabel
@@ -165,7 +131,7 @@ const AddEmployee: FC = () => {
     onChange={changeDOBHandler} required placeholder="Date of Birth" />
   </FloatingLabel>
   </Form.Group>
-<StyledSubmitButton className="submit-button" variant="success" value="submit" type="submit">Save Employee</StyledSubmitButton>
+<StyledButton className="submit-button" variant="success" value="submit" type="submit">Save Employee</StyledButton>
 </Form>
 
     </>
