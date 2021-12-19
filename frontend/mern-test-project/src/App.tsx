@@ -1,9 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import ListEmployee from './components/ListEmployee';
-import { BrowserRouter, Route, Routes, useRoutes  } from "react-router-dom";
+import { BrowserRouter, useRoutes  } from "react-router-dom";
 import AddEmployee from './components/AddEmployee';
 import UpdateEmployee from './components/UpdateEmployee';
 import DeleteEmployee from './components/DeleteEmployee';
+import GlobalStyles, { AppContainer } from "./components/styles/Globalstyles";
+import { Heading } from './components/styles/Header.styles';
+
 
 const App = () => {
 
@@ -21,10 +24,11 @@ const App = () => {
 const AppWrapper = () => {
   return (
     <BrowserRouter>
-    <div className="container">
-
+    
+   <AppContainer>
       <App />
-    </div>
+   </AppContainer>
+
     </BrowserRouter>
   );
 };

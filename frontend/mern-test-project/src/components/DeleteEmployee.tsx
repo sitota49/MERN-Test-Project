@@ -1,20 +1,22 @@
-import React, { FC, useEffect, useState, FormEvent} from 'react';
+import {FC, useEffect,  FormEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import 'react-accordion-ts/src/panel.css';
 import { useParams } from "react-router-dom";
-import {Form, Button } from 'react-bootstrap'
+import {Button } from 'react-bootstrap'
+import {  useNavigate } from "react-router-dom";
 
 
 import {
   getSingleEmployeeSelector
 } from "../store/employee/selectors";
-import { singleEmployeeRequest, deleteEmployeeRequest } from "../store/employee/actions";
-import { DeleteEmployeeRequestPayload, SingleEmployeeRequestPayload, IEmployee } from '../store/employee/types';
+import { singleEmployeeRequest, deleteEmployeeRequest, fetchEmployeeRequest } from "../store/employee/actions";
+import { DeleteEmployeeRequestPayload, SingleEmployeeRequestPayload } from '../store/employee/types';
 
 
 const DeleteEmployee: FC = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const singleEmployee = useSelector(getSingleEmployeeSelector);
     const { id } = useParams();
 
@@ -30,19 +32,16 @@ const DeleteEmployee: FC = () => {
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-    if(singleEmployee!){
-       const deleteEmployee: DeleteEmployeeRequestPayload = {
-          _id: singleEmployee._id,
-        
-        }
-
-        dispatch(deleteEmployeeRequest(deleteEmployee));
-    }
+        if(singleEmployee!){
+        const deleteEmployee: DeleteEmployeeRequestPayload = {
+            _id: singleEmployee._id,
             
-  
+            }
 
-       
-
+            dispatch(deleteEmployeeRequest(deleteEmployee));
+            dispatch(fetchEmployeeRequest());
+            navigate('/');
+        }
     }
  
  

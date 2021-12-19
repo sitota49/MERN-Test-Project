@@ -1,4 +1,3 @@
-import { ifError } from "assert";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
@@ -7,13 +6,10 @@ import {
   fetchEmployeeSuccess,
   updateEmployeeSuccess,
   updateEmployeeFailure,
-  addEmployeeRequest,
   addEmployeeSuccess,
   addEmployeeFailure,
-  singleEmployeeRequest,
   singleEmployeeSuccess,
   singleEmployeeFailure,
-  deleteEmployeeRequest,
   deleteEmployeeSuccess,
   deleteEmployeeFailure,
 } from "./actions";
@@ -32,7 +28,6 @@ import {
   SingleEmployeeRequestPayload,
   UpdateEmployeeRequest,
   UpdateEmployeeRequestPayload,
-  SingleEmployeeSuccessPayload,
   DeleteEmployeeRequestPayload,
   DeleteEmployeeRequest,
 } from "./types";

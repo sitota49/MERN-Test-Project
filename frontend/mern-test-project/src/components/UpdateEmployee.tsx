@@ -1,23 +1,19 @@
-import React, { FC, useEffect, useState, FormEvent} from 'react';
+import  { FC, useEffect, FormEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import 'react-accordion-ts/src/panel.css';
 import { useParams } from "react-router-dom";
-import {Form, Button } from 'react-bootstrap'
-
-
+import { Button } from 'react-bootstrap'
+import {  useNavigate } from "react-router-dom";
 import {
-  getPendingSelector,
-  getEmployeesSelector,
-  getErrorSelector,
   getSingleEmployeeSelector
 } from "../store/employee/selectors";
-import { singleEmployeeRequest, updateEmployeeRequest } from "../store/employee/actions";
-import { UpdateEmployeeRequestPayload, SingleEmployeeRequestPayload, IEmployee } from '../store/employee/types';
+import { fetchEmployeeRequest, singleEmployeeRequest, updateEmployeeRequest } from "../store/employee/actions";
+import { UpdateEmployeeRequestPayload, SingleEmployeeRequestPayload } from '../store/employee/types';
 
 
 const UpdateEmployee: FC = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const singleEmployee = useSelector(getSingleEmployeeSelector);
     const { id } = useParams();
 
@@ -58,24 +54,19 @@ const UpdateEmployee: FC = () => {
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-    if(singleEmployee!){
-       const updated: UpdateEmployeeRequestPayload = {
-          _id: singleEmployee._id,
-          name:  singleEmployee.name,
-          gender:singleEmployee.gender,
-          date_of_birth:singleEmployee.date_of_birth,
-          salary: +singleEmployee.salary
+        if(singleEmployee!){
+          const updated: UpdateEmployeeRequestPayload = {
+              _id: singleEmployee._id,
+              name:  singleEmployee.name,
+              gender:singleEmployee.gender,
+              date_of_birth:singleEmployee.date_of_birth,
+              salary: +singleEmployee.salary
+            }
+
+            dispatch(updateEmployeeRequest(updated));
+            dispatch(fetchEmployeeRequest());
+            navigate('/');
         }
-
-        dispatch(updateEmployeeRequest(updated));
-    }
-       
-
-       
-  
-
-       
-
     }
  
  
@@ -98,7 +89,7 @@ const UpdateEmployee: FC = () => {
             <label className="label">Gender</label>
           <div className="control">
             <select className="input" placeholder="Select Gender" onChange={changeGenderHandler}>
-               {singleEmployee?.gender == "Male" ? 
+               {singleEmployee?.gender === "Male" ? 
                <>
                 <option value="Male" selected>Male</option>
                 <option value="Female">Female</option> 

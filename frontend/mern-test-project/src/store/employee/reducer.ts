@@ -26,7 +26,7 @@ const initialState: EmployeeState = {
   sucess:null
 };
 
-export default (state = initialState, action: EmployeeActions) => {
+const reducer= (state = initialState, action: EmployeeActions) => {
   switch (action.type) {
     case FETCH_EMPLOYEE_REQUEST:
     case SINGLE_EMPLOYEE_REQUEST:
@@ -93,3 +93,5 @@ export default (state = initialState, action: EmployeeActions) => {
       };
   }
 };
+
+export default reducer;
